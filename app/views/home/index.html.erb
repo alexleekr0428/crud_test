@@ -1,0 +1,30 @@
+<div class ="container">
+    <div class ="row">
+        
+        <h1>Share your thoughts</h1>
+        <br> 
+        <a href ="/users/sign_out">logout</a> - <%= current_user.email %> 
+        <form action ="/add" method = "POST">
+            <input type ="text" name ="article"><br> 
+            <input type ="submit">
+        </form>   
+        
+        <% @hello.each do |s| %> 
+            <div class="well">
+            <%= s.article %> <br>
+            
+            <% if Like.where(:user => current_user).where(:post_id => s.id).empty?%> 
+                <a href = "/like/<%=s.id%>">like </a> (<%=s.likes.count %>)<br>   
+            <% else %> 
+                <a href = "/unlike/<%=s.id%>">unlike </a> (<%=s.likes.count %>)<br>   
+            <% end %> 
+            
+            <a href = "/delete/<%=s.id%>"> Delete post </a> <br> 
+            <a href = "/update/<%=s.id%>"> Update post </a> <br> 
+            </div>
+            
+        <% end %> 
+        
+         
+    </div>
+</div>
